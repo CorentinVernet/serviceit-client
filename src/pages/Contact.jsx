@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
@@ -10,11 +14,14 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    const res = await fetch(
+      "https://serviceit-server.onrender.com/api/contact",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
     const data = await res.json();
     if (data.success) {
       setStatus("Message envoyé !");
@@ -28,10 +35,36 @@ export default function Contact() {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Contactez-moi</h2>
       <form className="flex flex-col gap-4 max-w-md" onSubmit={handleSubmit}>
-        <input className="p-2 border rounded" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom" required />
-        <input className="p-2 border rounded" name="email" value={formData.email} onChange={handleChange} placeholder="Votre email" required />
-        <textarea className="p-2 border rounded" name="message" value={formData.message} onChange={handleChange} placeholder="Votre message" required />
-        <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" type="submit">Envoyer</button>
+        <input
+          className="p-2 border rounded"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Votre nom"
+          required
+        />
+        <input
+          className="p-2 border rounded"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Votre email"
+          required
+        />
+        <textarea
+          className="p-2 border rounded"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Votre message"
+          required
+        />
+        <button
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+          type="submit"
+        >
+          Envoyer
+        </button>
         {status && <p>{status}</p>}
       </form>
     </div>
