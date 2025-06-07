@@ -33,9 +33,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-6 max-w-3xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Contactez-moi</h2>
-      <form className="flex flex-col gap-4 max-w-md" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           className="p-2 border rounded"
           name="name"
